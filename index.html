@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resurge | Call of Duty Clients</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#f97316', // Laranja estilo Black Ops
+                            dark: '#ea580c',
+                            black: '#0a0a0a',
+                            surface: '#171717'
+                        },
+                        discord: '#5865F2'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Teko', 'sans-serif'] // Para títulos impactantes
+                    }
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-display {
+            font-family: 'Teko', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efeito de brilho nos botões */
+        .btn-glow:hover {
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+        }
+
+        .btn-discord-glow:hover {
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-brand-black text-gray-200 min-h-screen flex flex-col">
+
+    <!-- Header / Navbar -->
+    <header class="bg-brand-surface border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img src="RESURGE_600_x_240_px_1.gif" alt="Resurge Logo"
+                        class="h-12 w-auto object-contain mix-blend-screen">
+                    <span
+                        class="font-display text-3xl font-bold text-white tracking-wider hidden sm:block">RESURGE</span>
+                    <a href="https://discord.gg/tQxwsCRkQU" target="_blank"
+                        class="text-gray-400 hover:text-discord transition-colors sm:ml-2" title="Join our Discord">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 127.14 96.36">
+                            <path
+                                d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.2,46,96.12,53,91.08,65.69,84.69,65.69Z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Desktop Tabs -->
+                <nav class="hidden md:flex space-x-1" id="desktop-tabs">
+                    <button onclick="switchTab('bo3')"
+                        class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-brand bg-brand/10"
+                        data-target="bo3">Black Ops III</button>
+                    <button onclick="switchTab('bo2')"
+                        class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-gray-300 hover:text-white hover:bg-gray-800"
+                        data-target="bo2">Black Ops II</button>
+                    <button onclick="switchTab('legacy')"
+                        class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-gray-300 hover:text-white hover:bg-gray-800"
+                        data-target="legacy">Legacy Clients</button>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Tabs -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-surface border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+                <button onclick="switchTab('bo3'); toggleMobileMenu()"
+                    class="tab-btn-mobile w-full text-left px-3 py-2 rounded-md text-base font-medium text-brand bg-brand/10"
+                    data-target="bo3">Black Ops III</button>
+                <button onclick="switchTab('bo2'); toggleMobileMenu()"
+                    class="tab-btn-mobile w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800"
+                    data-target="bo2">Black Ops II</button>
+                <button onclick="switchTab('legacy'); toggleMobileMenu()"
+                    class="tab-btn-mobile w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800"
+                    data-target="legacy">Legacy Clients</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Tab: Black Ops III -->
+        <div id="bo3" class="tab-content active">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div
+                        class="inline-block px-3 py-1 mb-4 rounded-full bg-brand/20 text-brand text-sm font-semibold tracking-wide border border-brand/30">
+                        BETA AVAILABLE
+                    </div>
+                    <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">Resurge <br><span
+                            class="text-brand">Black Ops III</span></h1>
+                    <p class="text-lg text-gray-400 mb-8 leading-relaxed">
+                        Experience Black Ops III like never before. Play Zombies on secure Xbox servers, free from all
+                        Steam BO3 exploits, and enjoy massive quality-of-life improvements.
+                    </p>
+
+                    <ul class="space-y-4 mb-10 text-gray-300">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-brand mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Play Zombies on Xbox Servers</strong> securely with friends.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-brand mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Safe from all exploits:</strong> Includes the latest security patches.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-brand mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Better Performance:</strong> Optimized for modern systems.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-brand mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Controller Improvements:</strong> Native feeling and reduced input lag.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-brand mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Mod Support:</strong> Run mods seamlessly on the MS Store version.</span>
+                        </li>
+                    </ul>
+
+                    <a href="https://github.com/Spet001/BOIII-ReImagined-UWP/releases/download/Resurge/Resurge.Client.BETA.Installer.exe"
+                        target="_blank"
+                        class="btn-glow inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-brand rounded-lg hover:bg-brand-dark transition-all w-full md:w-auto">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        Download Beta Client
+                    </a>
+                </div>
+                <div class="relative">
+                    <!-- Placeholder visual representation -->
+                    <div
+                        class="aspect-video bg-gray-800 rounded-xl overflow-hidden border border-gray-700 shadow-2xl relative">
+                        <img src="https://images.squarespace-cdn.com/content/v1/55ef0e29e4b099e22cdc9eea/1445633577553-O703N9TT40696SWM689N/image-asset.png"
+                            alt="Black Ops 3" class="w-full h-full object-cover object-center absolute inset-0 z-0">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-brand/20 to-transparent z-10 pointer-events-none">
+                        </div>
+                    </div>
+                    <!-- Decorative element -->
+                    <div class="absolute -z-10 -top-10 -right-10 w-40 h-40 bg-brand/30 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Black Ops II -->
+        <div id="bo2" class="tab-content">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 relative">
+                    <!-- Placeholder visual representation -->
+                    <div
+                        class="aspect-video bg-gray-800 rounded-xl overflow-hidden border border-gray-700 shadow-2xl relative">
+                        <img src="https://images.fastcompany.com/image/upload/f_auto,q_auto,c_fit/fc/1681776-poster-1920-building-a-better-tomorrow-in-call-of-duty-black-ops-ii.jpg"
+                            alt="Black Ops 2" class="w-full h-full object-cover object-center absolute inset-0 z-0">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-orange-600/20 to-transparent z-10 pointer-events-none">
+                        </div>
+                    </div>
+                    <!-- Decorative element -->
+                    <div class="absolute -z-10 -bottom-10 -left-10 w-40 h-40 bg-orange-600/20 rounded-full blur-3xl">
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">Resurge <br><span
+                            class="text-orange-500">Black Ops II</span></h1>
+                    <p class="text-lg text-gray-400 mb-8 leading-relaxed">
+                        Play Zombies or Multiplayer like it's 2012. We bring the authentic experience back, upgraded for
+                        modern hardware and fully secured against modern threats.
+                    </p>
+
+                    <ul class="space-y-4 mb-10 text-gray-300">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-orange-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Vanilla Xbox Servers on PC:</strong> The pure, unaltered classic
+                                experience.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-orange-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Massive Performance Boost:</strong> Upgraded to DX11 64-bits (from DX9
+                                32-bits) for buttery smooth gameplay.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-orange-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>Fully Secure:</strong> Safe from all known Steam network exploits and
+                                RCEs.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-orange-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span><strong>And many more features</strong> available in the Discord community.</span>
+                        </li>
+                    </ul>
+
+                    <a href="https://discord.gg/tQxwsCRkQU" target="_blank"
+                        class="btn-discord-glow inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-discord rounded-lg transition-all w-full md:w-auto">
+                        <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 127.14 96.36">
+                            <path
+                                d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.2,46,96.12,53,91.08,65.69,84.69,65.69Z" />
+                        </svg>
+                        Join Discord to Download
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Legacy Clients -->
+        <div id="legacy" class="tab-content">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h1 class="text-5xl font-bold text-white mb-4">Legacy <span class="text-brand">Clients</span></h1>
+                <p class="text-lg text-gray-400">
+                    Return to the classics. Our legacy clients allow you to experience the golden era of Call of Duty
+                    utilizing official Microsoft Store servers for a safe and stable environment.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <!-- Black Ops Legacy -->
+                <div
+                    class="bg-brand-surface border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors flex flex-col h-full">
+                    <div
+                        class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mb-4 text-xl font-display font-bold text-gray-400 overflow-hidden">
+                        <img src="https://static.wikia.nocookie.net/logopedia/images/c/cd/BlackOpsMP.png/"
+                            alt="BO1 Icon" class="w-full h-full object-contain p-1">
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Black Ops Legacy</h3>
+                    <p class="text-gray-400 flex-grow mb-6">
+                        Dive back into the original Cold War and classic Zombies maps. Play seamlessly and securely on
+                        official Microsoft Store servers.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6 border-t border-gray-800 pt-4">
+                        <li class="flex items-center"><svg class="h-4 w-4 text-brand mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg> Zombies Support</li>
+                        <li class="flex items-center"><svg class="h-4 w-4 text-brand mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg> MS Store Servers</li>
+                    </ul>
+                </div>
+
+                <!-- MW2 Legacy -->
+                <div
+                    class="bg-brand-surface border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors flex flex-col h-full">
+                    <div
+                        class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mb-4 text-xl font-display font-bold text-gray-400 overflow-hidden">
+                        <img src="https://static.wikia.nocookie.net/logopedia/images/3/36/MW2.png/" alt="MW2 Icon"
+                            class="w-full h-full object-contain p-1">
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Modern Warfare 2</h3>
+                    <p class="text-gray-400 flex-grow mb-6">
+                        The ultimate fast-paced multiplayer experience from 2009. Re-experience the legendary maps and
+                        weapons on stable Microsoft Store servers.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6 border-t border-gray-800 pt-4">
+                        <li class="flex items-center"><svg class="h-4 w-4 text-brand mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg> Classic Multiplayer</li>
+                        <li class="flex items-center"><svg class="h-4 w-4 text-brand mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg> MS Store Servers</li>
+                    </ul>
+                </div>
+
+                <!-- IW/MWR Legacy -->
+                <div
+                    class="bg-brand-surface border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors flex flex-col h-full">
+                    <div
+                        class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mb-4 text-xl font-display font-bold text-gray-400 overflow-hidden">
+                        <img src="https://cdn2.steamgriddb.com/icon/21b12b67cb6ff82b0d5e9e1d96d4b56c.png" alt="IW Icon"
+                            class="w-full h-full object-contain p-1">
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Infinite Warfare / MWR</h3>
+                    <p class="text-gray-400 flex-grow mb-6">
+                        Jump into the distant future or revisit the remastered classic. Both titles are supported and
+                        fully playable via Microsoft Store servers.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-6 border-t border-gray-800 pt-4">
+                        <li class="flex items-center"><svg class="h-4 w-4 text-brand mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg> Multiplayer & Zombies</li>
+                        <li class="flex items-center"><svg class="h-4 w-4 text-brand mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg> MS Store Servers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center bg-gray-800/50 rounded-xl p-8 border border-gray-700">
+                <h3 class="text-xl font-bold text-white mb-4">Ready to play the classics?</h3>
+                <a href="https://discord.gg/tQxwsCRkQU" target="_blank"
+                    class="btn-discord-glow inline-flex items-center justify-center px-8 py-3 text-lg font-bold text-white bg-discord rounded-lg transition-all">
+                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 127.14 96.36">
+                        <path
+                            d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.2,46,96.12,53,91.08,65.69,84.69,65.69Z" />
+                    </svg>
+                    Get Legacy Clients on Discord
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-surface border-t border-gray-800 py-8 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+            <p>&copy; 2026 Resurge. Not affiliated with Activision Publishing, Inc. Call of Duty is a registered
+                trademark.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Função para alternar abas
+        function switchTab(tabId) {
+            // Esconde todos os conteúdos
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove estado 'ativo' de todos os botões (desktop e mobile)
+            document.querySelectorAll('.tab-btn, .tab-btn-mobile').forEach(btn => {
+                btn.classList.remove('text-brand', 'bg-brand/10');
+                btn.classList.add('text-gray-300');
+            });
+
+            // Mostra o conteúdo selecionado
+            document.getElementById(tabId).classList.add('active');
+
+            // Atualiza os botões correspondentes à aba ativa
+            document.querySelectorAll(`[data-target="${tabId}"]`).forEach(btn => {
+                btn.classList.remove('text-gray-300', 'hover:text-white', 'hover:bg-gray-800');
+                btn.classList.add('text-brand', 'bg-brand/10');
+            });
+        }
+
+        // Script para menu mobile
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        function toggleMobileMenu() {
+            menu.classList.toggle('hidden');
+        }
+
+        btn.addEventListener('click', toggleMobileMenu);
+    </script>
+</body>
+
+</html>
