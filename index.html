@@ -108,6 +108,9 @@
                     <button onclick="switchTab('legacy')"
                         class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-gray-300 hover:text-white hover:bg-gray-800"
                         data-target="legacy">Legacy Clients</button>
+                    <button onclick="switchTab('faq')"
+                        class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-gray-300 hover:text-white hover:bg-gray-800"
+                        data-target="faq">FAQ</button>
                 </nav>
 
                 <!-- Mobile menu button -->
@@ -134,6 +137,9 @@
                 <button onclick="switchTab('legacy'); toggleMobileMenu()"
                     class="tab-btn-mobile w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800"
                     data-target="legacy">Legacy Clients</button>
+                <button onclick="switchTab('faq'); toggleMobileMenu()"
+                    class="tab-btn-mobile w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800"
+                    data-target="faq">FAQ</button>
             </div>
         </div>
     </header>
@@ -403,6 +409,111 @@
                     </svg>
                     Get Legacy Clients on Discord
                 </a>
+            </div>
+        </div>
+
+        <!-- Tab: FAQ -->
+        <div id="faq" class="tab-content">
+            <div class="text-center md:text-left mb-12">
+                <h1 class="text-5xl font-bold text-white mb-4">Frequently Asked <span
+                        class="text-brand">Questions</span></h1>
+                <p class="text-lg text-gray-400">
+                    Find answers to the most common questions about Resurge.
+                </p>
+            </div>
+
+            <div class="space-y-6 max-w-4xl mx-auto mb-12">
+                <!-- FAQ Item 1 -->
+                <div
+                    class="bg-brand-surface border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center">
+                        <svg class="h-6 w-6 text-brand mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        What is Resurge?
+                    </h3>
+                    <p class="text-gray-400 pl-9">Resurge is a Client for playing many COD Games on Xbox Live Servers
+                        instead of Steam servers.</p>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div
+                    class="bg-brand-surface border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center">
+                        <svg class="h-6 w-6 text-brand mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        How do i install Resurge BO3?
+                    </h3>
+                    <p class="text-gray-400 pl-9">Download the BETA from Github, its a installer, so install it anywhere
+                        (except the game folder). After installing, open the launcher, select the game folder and
+                        install Resurge! Now you can launch Resurge via the launcher or Resurge.exe</p>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div
+                    class="bg-brand-surface border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center">
+                        <svg class="h-6 w-6 text-brand mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        How do i install Resurge BO2 and Legacy?
+                    </h3>
+                    <p class="text-gray-400 pl-9">Go to Discord and open a ticket, we will send you the client ready to
+                        be played for you!</p>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div
+                    class="bg-brand-surface border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center">
+                        <svg class="h-6 w-6 text-brand mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        I got a Virus alert!
+                    </h3>
+                    <p class="text-gray-400 pl-9">False positive</p>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div
+                    class="bg-brand-surface border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center">
+                        <svg class="h-6 w-6 text-brand mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        Source Code?
+                    </h3>
+                    <div class="text-gray-400 pl-9 space-y-2">
+                        <p><a href="https://github.com/Spet001/BOIII-ReImagined-UWP" target="_blank"
+                                class="text-brand hover:text-white transition-colors hover:underline break-all">https://github.com/Spet001/BOIII-ReImagined-UWP</a>
+                        </p>
+                        <div class="mt-4 pt-4 border-t border-gray-800">
+                            <p class="mb-2 text-white font-medium">Also Credits to:</p>
+                            <ul class="space-y-2 list-disc pl-5">
+                                <li><a href="https://github.com/Spet001/zeroproxy_backup" target="_blank"
+                                        class="text-gray-400 hover:text-brand transition-colors hover:underline break-all">https://github.com/Spet001/zeroproxy_backup</a>
+                                </li>
+                                <li><a href="https://github.com/Zephkek/XStoreUnlocker" target="_blank"
+                                        class="text-gray-400 hover:text-brand transition-colors hover:underline break-all">https://github.com/Zephkek/XStoreUnlocker</a>
+                                </li>
+                                <li><a href="https://github.com/shiversoftdev/BO3Enhanced" target="_blank"
+                                        class="text-gray-400 hover:text-brand transition-colors hover:underline break-all">https://github.com/shiversoftdev/BO3Enhanced</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
